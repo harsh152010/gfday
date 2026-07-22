@@ -17,7 +17,7 @@ def lock():
 
     return render_template(
         "index.html",
-        error="Secret word galat hai darling 💭"
+        error="Secret password galat hai darling 💭"
     )
 if( __name__=="__main__"):
       app.run(debug=True)
