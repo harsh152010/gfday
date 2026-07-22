@@ -150,6 +150,27 @@
         opacity: 0;
         animation: riseIn 1s ease forwards 0.9s;
       }
+      #musicToggle {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 10;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, var(--rose-gold), var(--gold));
+        font-size: 22px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+      }
+      #musicToggle:hover {
+        transform: scale(1.1);
+      }
+      #musicToggle.playing {
+        animation: pulse 1.5s ease-in-out infinite;
+      }
 
       @keyframes riseIn {
         from {
@@ -615,9 +636,16 @@
             </div>
           </div>
         </div>
-       
       </div>
     </main>
+    <audio id="bgMusic" loop>
+      <source
+        src="{{ url_for('static', filename='music/song.mp3') }}"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <button id="musicToggle" onclick="toggleMusic()">🎵</button>
 
     <footer>made with love ✦ 1 august</footer>
 
@@ -634,6 +662,19 @@
         p.style.animationDuration = 7 + Math.random() * 8 + "s";
         p.style.animationDelay = Math.random() * 10 + "s";
         petalContainer.appendChild(p);
+      }
+      function toggleMusic() {
+        const music = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicToggle");
+        if (music.paused) {
+          music.play();
+          btn.classList.add("playing");
+          btn.textContent = "⏸";
+        } else {
+          music.pause();
+          btn.classList.remove("playing");
+          btn.textContent = "🎵";
+        }
       }
 
       function openEnvelope() {
